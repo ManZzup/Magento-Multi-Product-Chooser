@@ -26,7 +26,6 @@ varienGridMassaction.addMethods(
                     setLocation(trElement.title);
                 }
                 else {
-                    console.log('else');
                     var checkbox = Element.select(trElement, 'input');
                     var isInput = Event.element(evt).tagName == 'input';
                     var checked = isInput ? checkbox[0].checked : !checkbox[0].checked;
@@ -65,6 +64,57 @@ varienGridMassaction.addMethods(
         },
         getTextValue: function() {
             return this.textString;
-        }
+        },
+        selectAll: function() {
+            this.textString = "Selected All Products";
+            this.setCheckedValues((this.useSelectAll ? this.getGridIds() : this.getCheckboxesValuesAsString()));
+            this.checkCheckboxes();
+            this.updateCount();
+            this.clearLastChecked();
+            return false;
+        },
+        selectVisible: function() {
+            var values = this.getCheckboxesValuesAsString().split(',');
+            var that = this;
+            this.setCheckedValues(this.getCheckboxesValuesAsString());
+            this.checkCheckboxes();
+            this.updateCount();
+            this.clearLastChecked();
+            $$('table.data tr[title=#]').each(function(e){
+                var childs = e.children;
+                var check = childs[0].children[0];
+                var id = childs[1].innerHTML.trim();
+                var val = childs[2].innerHTML.trim();
+                var hasopt = false;
+                for(var j=0;j<values.length;j++){
+                    if(values[j] === id){
+                        hasopt = true;
+                        break;
+                    }
+                }
+                if(hasopt){
+                    that.setTextValue(check,val);
+                }
+            });
+            return false;
+        },
+        unselectVisible: function() {
+            this.getCheckboxesValues().each(function(key){
+                this.checkedString = varienStringArray.remove(key, this.checkedString);
+            }.bind(this));
+            this.checkCheckboxes();
+            this.updateCount();
+            this.clearLastChecked();
+            this.textString = "";
+            return false;
+        },
+        unselectAll: function() {
+            this.setCheckedValues('');
+            this.checkCheckboxes();
+            this.updateCount();
+            this.clearLastChecked();
+            this.textString = "";
+            return false;
+        },
     }
 );
