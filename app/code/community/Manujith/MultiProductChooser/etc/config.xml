@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Manujith_MultiProductChooser>
+      <version>0.1.0</version>
+    </Manujith_MultiProductChooser>
+  </modules>
+  <admin>
+      <routers>
+          <adminhtml>
+              <args>
+                  <modules>
+                      <multiproductchooser before="Mage_Adminhtml">Manujith_MultiProductChooser_Adminhtml</multiproductchooser>
+                  </modules>
+              </args>
+          </adminhtml>
+      </routers>
+  </admin>
+  <global>
+    <helpers>
+      <multiproductchooser>
+        <class>Manujith_MultiProductChooser_Helper</class>
+      </multiproductchooser>
+    </helpers>
+    <blocks>
+        <multiproductchooser>
+            <class>Manujith_MultiProductChooser_Block</class>
+        </multiproductchooser>
+    </blocks>
+  </global>
+
+  <default>
+        <multiproductchooser>
+            <chooser_defaults>
+                <catalog_product_widget_chooser>
+                    <input_label>Product</input_label>
+                    <button_text>Select Product...</button_text>
+                </catalog_product_widget_chooser>
+                <default>
+                    <input_label>Element</input_label>
+                    <button_text>Select...</button_text>
+                </default>
+            </chooser_defaults>
+        </multiproductchooser>
+    </default>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <multiproductchooser>
+                    <file>multiproductchooser.xml</file>
+                </multiproductchooser>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

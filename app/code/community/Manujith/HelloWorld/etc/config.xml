@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Manujith_HelloWorld>
+      <version>0.1.0</version>
+    </Manujith_HelloWorld>
+  </modules>
+  <frontend>
+    <routers>
+      <helloworld>
+        <use>standard</use>
+        <args>
+          <module>Manujith_HelloWorld</module>
+          <frontName>helloworld</frontName>
+        </args>
+      </helloworld>
+    </routers>
+    <layout>
+        <updates>
+            <manujith_helloworld module="Manujith_HelloWorld">
+                <file>manujith_helloworld.xml</file>
+            </manujith_helloworld>
+        </updates>
+    </layout>
+  </frontend>
+	<admin>
+	  <routers>
+	    <helloworld>
+	     <use>admin</use>
+	     <args>
+	      <module>Manujith_HelloWorld</module>
+	      <frontName>admin_helloworld</frontName>
+	     </args>
+	    </helloworld>
+	  </routers>
+	</admin>
+</config>
